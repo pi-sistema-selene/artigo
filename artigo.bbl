@@ -21,43 +21,78 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{santos2024}
-A.~Santos, B.~Lima, and C.~Ferreira, ``Advanced numerical methods for complex
-  system analysis,'' \emph{Journal of Computational Mathematics}, vol.~45,
-  no.~3, pp. 234--251, 2024.
+\bibitem{Bellettini2017}
+\BIBentryALTinterwordspacing
+M.~B. Bellettini \emph{et~al.}, ``Diseases and pests noxious to pleurotus spp.
+  mushroom crops,'' \emph{Revista Argentina de Microbiología}, 2017. [Online].
+  Available:
+  \url{https://www.sciencedirect.com/science/article/pii/S0325754117301505}
+\BIBentrySTDinterwordspacing
 
-\bibitem{oliveira2023}
-P.~Oliveira and M.~Costa, ``Machine learning applications in dynamic systems,''
-  \emph{IEEE Transactions on Systems, Man, and Cybernetics}, vol.~53, no.~8,
-  pp. 4567--4580, 2023.
+\bibitem{Scheffer2023}
+\BIBentryALTinterwordspacing
+R.~Scheffer, ``Controle de contaminações durante o cultivo e pós-colheita de
+  cogumelos comestíveis,'' Master's thesis, Universidade Federal do Paraná,
+  2023. [Online]. Available:
+  \url{https://acervodigital.ufpr.br/xmlui/handle/1884/98337}
+\BIBentrySTDinterwordspacing
 
-\bibitem{silva2025}
-J.~Silva, R.~Almeida, and T.~Rodrigues, ``Computational modeling of nonlinear
-  phenomena,'' \emph{Applied Mathematics and Computation}, vol. 412, p. 126589,
-  2025.
+\bibitem{Urben2017}
+A.~F. Urben, \emph{Produção de cogumelos por meio de tecnologia chinesa
+  modificada: biotecnologia e aplicações na agricultura e na saúde}.\hskip
+  1em plus 0.5em minus 0.4em\relax Embrapa Recursos Genéticos e Biotecnologia,
+  2017.
 
-\bibitem{brown2023}
-D.~Brown and F.~Taylor, \emph{Numerical Methods: Theory and Applications},
-  3rd~ed.\hskip 1em plus 0.5em minus 0.4em\relax Cambridge, UK: Cambridge
-  University Press, 2023.
+\bibitem{Bennin2026}
+\BIBentryALTinterwordspacing
+K.~E. Bennin, D.~v. Teeffelen, W.~Hurst, and O.~Babur, ``A tertiary systematic
+  literature review and experimental evaluation of deep learning models for
+  plant disease detection,'' \emph{Precision Agriculture}, vol.~27, no.~98, pp.
+  1--21, 2026. [Online]. Available:
+  \url{https://link.springer.com/article/10.1007/s11119-026-10228-8}
+\BIBentrySTDinterwordspacing
 
-\bibitem{kumar2024}
-S.~Kumar and L.~Chen, ``Efficient algorithms for differential equation
-  systems,'' in \emph{Proceedings of the International Conference on
-  Computational Science}, Prague, Czech Republic, 2024, pp. 112--125.
+\bibitem{Sandler2018}
+\BIBentryALTinterwordspacing
+M.~Sandler, A.~Howard, M.~Zhu, A.~Zhmoginov, and L.-C. Chen, ``Mobilenetv2:
+  Inverted residuals and linear bottlenecks,'' in \emph{Proceedings of the IEEE
+  Conference on Computer Vision and Pattern Recognition (CVPR)}, 2018, pp.
+  4510--4520. [Online]. Available:
+  \url{https://doi.org/10.1109/CVPR.2018.00474}
+\BIBentrySTDinterwordspacing
 
-\bibitem{wang2023}
-Y.~Wang, H.~Zhang, and K.~Lee, ``Comparative study of numerical integration
-  methods,'' \emph{Numerical Algorithms}, vol.~92, no.~4, pp. 1523--1547, 2023.
+\bibitem{Nguyen2024}
+\BIBentryALTinterwordspacing
+H.~H. Nguyen, D.-Y. Shin, W.-S. Jung, T.-Y. Kim, and D.-H. Lee, ``An integrated
+  iot sensor-camera system toward leveraging edge computing for smart
+  greenhouse mushroom cultivation,'' \emph{Agriculture}, vol.~14, no.~3, p.
+  489, 2024. [Online]. Available:
+  \url{https://doi.org/10.3390/agriculture14030489}
+\BIBentrySTDinterwordspacing
 
-\bibitem{johnson2024}
-R.~Johnson and E.~Martinez, ``Physics-informed neural networks for system
-  identification,'' \emph{Nature Computational Science}, vol.~4, no.~2, pp.
-  145--159, 2024.
+\bibitem{Qian2020}
+\BIBentryALTinterwordspacing
+Y.~Qian \emph{et~al.}, ``Real-time detection and localization using ssd method
+  for oyster mushroom picking robot,'' in \emph{International Conference on
+  Mechatronics and Automation (ICMA)}.\hskip 1em plus 0.5em minus 0.4em\relax
+  IEEE, 2020, pp. 1--6. [Online]. Available:
+  \url{https://ieeexplore.ieee.org/abstract/document/9303258}
+\BIBentrySTDinterwordspacing
 
-\bibitem{zhang2025}
-X.~Zhang, Q.~Liu, and W.~Anderson, ``Deep learning approaches for complex
-  system dynamics,'' \emph{Artificial Intelligence Review}, vol.~58, no.~1, pp.
-  89--112, 2025.
+\bibitem{Rahman2021}
+\BIBentryALTinterwordspacing
+H.~Rahman \emph{et~al.}, ``Iot enabled mushroom farm automation with machine
+  learning to classify toxic mushrooms in bangladesh,'' \emph{Elsevier}, 2021.
+  [Online]. Available:
+  \url{https://www.sciencedirect.com/science/article/pii/S2666154321001691}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Nuankaew2025}
+W.~S. Nuankaew \emph{et~al.}, ``Harnessing ai for agriculture: Oyster mushroom
+  disease detection with iot and web application on growing bags using deep
+  learning,'' in \emph{International Conference on Digital Arts, Media and
+  Technology (DAMT) / ECTI Northern Section Conference on Electrical,
+  Electronics, Computer and Telecommunications Engineering (NCON)}.\hskip 1em
+  plus 0.5em minus 0.4em\relax IEEE, 2025.
 
 \end{thebibliography}

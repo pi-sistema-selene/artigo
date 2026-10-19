@@ -69,14 +69,19 @@
     {\thesubsection}{1em}{}
 
 % Informações do artigo
-\title{\vspace{0.6cm}\textbf{\Large Análise Computacional de Sistemas Complexos Utilizando Métodos Numéricos Avançados}}
+\title{\vspace{0.6cm}\textbf{\Large Detecção de fungos parasitas em cogumelos usando aprendizagem profunda}}
 \author{
-    João da Silva$^{1}$, Maria Santos$^{2}$, Pedro Oliveira$^{3}$ \\[0.3cm]
+    Andrei Araujo$^{1}$, Erlon Santos$^{2}$, Leandro Sueoka$^{3}$, Lucas Parada$^{4}$, Ricardo Estevam$^{5}$ \\[0.3cm]
     \small
     $^{1}$Faculdade de Tecnologia do Estado de São Paulo \\
-    $^{2}$Universidade de São Paulo \\
-    $^{3}$Instituto de Pesquisas Tecnológicas \\[0.2cm]
-    \textit{joao.silva@fatec.sp.gov.br, maria.santos@usp.br, pedro.oliveira@ipt.br}
+    $^{2}$Fatec Registro \\[0.2cm]
+    \begin{tabular}{c}
+        \textit{andrei.araujo@aluno.cps.sp.gov.br} \\
+        \textit{erlon.santos@aluno.cps.sp.gov.br} \\
+        \textit{leandro.sueoka@aluno.cps.sp.gov.br} \\
+        \textit{lucas.parada@aluno.cps.sp.gov.br} \\
+        \textit{ricardo.estevam@aluno.cps.sp.gov.br}
+    \end{tabular}
 }
 \date{}
 
@@ -91,10 +96,9 @@
 % Resumo
 \section*{Resumo}
 
-\lipsum[1] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-
+\lipsum[0]Este trabalho apresenta um sistema inteligente de monitoramento para o cultivo de \textit{Pleurotus ostreatus} (shimeji), integrando sensores ambientais (temperatura, umidade e luminosidade) e visão computacional para detecção precoce de anomalias. A inteligência artificial baseia-se em aprendizagem profunda com a rede MobileNetV2, utilizando Transfer Learning a partir de pesos pré-treinados no ImageNet. O modelo foi treinado para classificação binária (saudável vs. anomalia), abrangendo fungos parasitas, estilamento e achatamento do chapéu, com 300 imagens divididas em 80\% para treino e 20\% para validação. Foram aplicadas técnicas de data augmentation e prevenção de overfitting, incluindo EarlyStopping, Dropout e class\_weight. Os resultados indicaram acurácia de 68,33\%, sensibilidade de 10\%, especificidade de 97,5\%, FPR de 2,5\% e FNR de 90\%. O modelo apresentou comportamento conservador, com alta especificidade e baixa sensibilidade na detecção de anomalias. Conclui-se que a integração entre IoT, visão computacional e aprendizagem profunda é promissora para a fungicultura, e que a coleta de mais dados e o ajuste do threshold podem melhorar o desempenho do sistema.
 \vspace{0.3cm}
-\noindent\textit{\textbf{Palavras-chave:}} Sistemas complexos, Métodos numéricos, Análise computacional, Modelagem matemática, Simulação
+\noindent\textit{\textbf{Palavras-chave:}}  Aprendizagem Profunda; Cogumelos; Internet das Coisas.
 
 \vspace{0.5cm}
 \noindent\rule{\textwidth}{0.5pt}
@@ -103,164 +107,214 @@
 % Introdução
 \section{Introdução}
 
-\lipsum[2-3] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae eros eget tellus tristique bibendum. Donec rutrum sed sem quis venenatis. Proin eu ipsum in lectus mollis penatibus \cite{santos2024, oliveira2023}.\footnote{Este é um exemplo de nota de rodapé. Notas de rodapé são úteis para adicionar informações complementares sem interromper o fluxo do texto principal.}
+Os cogumelos constituem uma relevante fonte natural de nutrientes, destacando-se pelo elevado teor de proteínas, vitaminas e compostos bioativos benéficos à saúde humana. No mercado global de cogumelos comestíveis, as doenças fúngicas representam uma das principais causas de perdas produtivas. Esses organismos são cultivados predominantemente em ambientes fechados, sob condições ambientais controladas, o que favorece a adoção de programas integrados de manejo de doenças. Tais programas combinam o uso de fungicidas químicos, alternativas de biocontrole e práticas agronômicas adequadas, permitindo reduzir a incidência de patógenos e garantir o manejo sanitário das culturas. Dessa forma, diversos métodos de controle são continuamente aplicados com o objetivo de minimizar perdas e assegurar a qualidade do produto final \cite{Bellettini2017}.
 
-Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed aliquam, nulla quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris \cite{silva2025}. Como discutido por Brown e Taylor \cite[p.~45]{brown2023}, os métodos clássicos ainda são fundamentais para a compreensão moderna dos sistemas dinâmicos.
+Com base nesse cenário, a aplicação de tecnologias emergentes no setor agrícola possibilita o aumento da eficiência produtiva, a redução de perdas e a melhoria da qualidade dos alimentos e fatores diretamente relacionados à segurança alimentar. Além disso, o monitoramento contínuo de variáveis ambientais, como umidade e temperatura, permite otimizar o uso de recursos naturais, reduzir o desperdício de insumos e promover uma produção mais sustentável, resiliente e alinhada às demandas atuais por sistemas agrícolas inteligentes e ecologicamente responsáveis.
+
+No contexto brasileiro, o \textit{Pleurotus ostreatus} (shimeji) destaca-se entre as espécies mais amplamente cultivadas, devido ao seu elevado valor nutricional e à crescente demanda no mercado alimentício. Entretanto, o aumento da produção tem sido acompanhado por uma maior ocorrência de contaminações microbiológicas, resultantes da proliferação de microrganismos oportunistas durante as etapas de cultivo e processamento, podendo ocasionar perdas totais nas colheitas. As infestações por pragas e doenças comprometem significativamente a qualidade e a composição do produto final, reduzindo a competitividade do produtor no mercado e impactando negativamente a rentabilidade e a sustentabilidade da produção \cite{Scheffer2023}.
+
+Com isso, o Vale do Ribeira, localizado no Estado de São Paulo, destaca-se como uma região promissora para a implementação de sistemas baseados em tecnologias inteligentes. Essa região, foco da presente pesquisa, apresenta um constante crescimento na produção de espécies de cogumelos, especialmente o shimeji, o que reforça o potencial de aplicação de soluções tecnológicas voltadas ao monitoramento e controle de variáveis ambientais, contribuindo para o fortalecimento da produção local e o desenvolvimento sustentável do setor \cite{Urben2017}.
+
+Ademais, a pesquisa de campo realizada com produtor local evidenciou demandas relacionadas ao acompanhamento automatizado da produção, principalmente no que se refere ao monitoramento das condições ambientais, à redução de perdas e à geração de relatórios. Tais aspectos corroboram a necessidade de ferramentas tecnológicas acessíveis e compatíveis com a realidade produtiva regional.
+
+Apesar de a literatura contemplar investigações sobre monitoramento e aplicação de inteligência artificial (IA) no cultivo de cogumelos, os trabalhos disponíveis concentram-se, predominantemente, na classificação taxonômica de espécies ou na proposição de arquiteturas para vigilância ambiental. Tampouco se observa, no âmbito comercial, uma solução que conjugue esses dois domínios --- sensoriamento e IA --- e que se apresente como ferramenta operacional ao usuário final. Embora as produções científicas existentes apresentem bons resultados de detecção, carecem de resultados considerando-se a lacuna das condições reais de cultivo (\textit{reality gap}) observados na literatura \cite{Bennin2026}.
+
+Entre os modelos de redes neurais existentes, a MobileNetV2 destaca-se como uma solução que combina baixo custo computacional e bom desempenho. Graças ao uso de convoluções \textit{depthwise} separáveis, seu custo computacional é de 8 a 9 vezes menor por camada em comparação às redes convolucionais tradicionais \cite{Sandler2018}. Dessa forma, a arquitetura torna-se adequada para aplicações em dispositivos com recursos limitados e pouco poder de processamento, como APIs hospedadas em servidores gratuitos ou sistemas embarcados.
+
+Deste modo, o presente projeto tem como objetivo o desenvolvimento de um sistema inteligente de monitoramento do cultivo de cogumelos, voltado à prevenção de infecções e infestações por parasitas. A proposta visa integrar sensoriamento ambiental e IA para garantir o acompanhamento automatizado das condições do composto e do desenvolvimento dos cogumelos. O sistema será responsável por coletar e exibir dados em tempo real sobre umidade, temperatura e porcentagem estimada de infecção, obtidos por meio de sensores instalados no ambiente de cultivo, permitindo que o produtor acompanhe remotamente as condições ideais para o crescimento saudável dos fungos.
+
+Além disso, será implementada uma IA baseada em aprendizagem profunda (\textit{deep learning}). As imagens capturadas no ambiente serão processadas e utilizadas tanto para o treinamento da IA quanto para o monitoramento contínuo do cultivo. O modelo será treinado para identificar padrões visuais indicativos de infecções e parasitas, como alterações de cor, presença de manchas e irregularidades no composto. Quando o sistema detectar anomalias que indiquem risco de contaminação, a porcentagem de alerta será automaticamente ajustada e o produtor será notificado por meio do aplicativo, permitindo uma resposta rápida e precisa no manejo das culturas.
+
+Alinhando-se o presente estudo com a Agenda 2030 e os Objetivos de Desenvolvimento Sustentável (ODS) propostos pela Organização das Nações Unidas (ONU), a presente pesquisa relaciona-se diretamente ao ODS nº 2 --- Fome Zero e Agricultura Sustentável. Este objetivo visa erradicar a fome e promover sistemas alimentares produtivos, resilientes e ambientalmente responsáveis. Dessa forma, o desenvolvimento de um sistema inteligente de monitoramento e prevenção no cultivo de cogumelos contribui não apenas para o aumento da produtividade e da segurança alimentar, mas também para a redução do desperdício e o uso eficiente dos recursos naturais, reforçando o compromisso com práticas agrícolas sustentáveis e inovadoras.
 
 % Objetivo
 \section{Objetivo}
 
-\lipsum[4] O principal objetivo deste trabalho é apresentar uma análise detalhada dos sistemas complexos utilizando métodos computacionais avançados. Os objetivos específicos incluem:
+Com esta pesquisa, tem-se como principal objetivo desenvolver um sistema inteligente de monitoramento para o cultivo de cogumelos, utilizando sensores ambientais e inteligência artificial, a fim de prevenir infecções e infestações por parasitas, proporcionando maior controle, segurança e produtividade ao produtor, utilizando níveis de umidade, temperatura e índice de infecção. Além disso, como metas parciais visa-se:
 
 \begin{itemize}
-    \item Desenvolver modelos matemáticos para representação de sistemas dinâmicos;
-    \item Implementar algoritmos numéricos eficientes para solução de equações diferenciais;
-    \item Validar os resultados através de simulações computacionais;
-    \item Comparar diferentes abordagens metodológicas existentes na literatura \cite{kumar2024, wang2023}.
+    \item Implementar uma integração eficiente entre o sistema proposto e a área de atuação dos produtores do Vale do Ribeira, ampliando o acesso e a disponibilidade de dados para o aprimoramento contínuo do modelo de inteligência artificial.
+    \item Desenvolver a integração de câmeras e sensores de temperatura e umidade em um ambiente de Internet das Coisas (IoT) funcional, possibilitando a coleta automatizada de dados e o monitoramento em tempo real das condições ambientais do cultivo.
 \end{itemize}
 
 % Estado da Arte
 \section{Estado da Arte}
 
-\lipsum[5] Lorem ipsum dolor sit amet, consectetur adipiscing elit. Diversos estudos têm explorado a aplicação de métodos numéricos em sistemas complexos. Segundo \cite{johnson2024}, a utilização de técnicas avançadas permite uma melhor compreensão dos fenômenos físicos.
+Nos últimos anos, o uso de técnicas de \textit{machine learning} (ML) e visão computacional na agricultura tem se expandido significativamente, oferecendo soluções avançadas para monitoramento, classificação e colheita de produtos cultivados em ambientes controlados. Em especial para este estudo, a aplicação dessas técnicas no cultivo de cogumelos tem se mostrado promissora.
 
-\lipsum[6] Os métodos clássicos de análise numérica, como o método de Euler e Runge-Kutta, têm sido amplamente utilizados na literatura \cite{brown2023}. Essas abordagens tradicionais estabeleceram as bases para o desenvolvimento de técnicas mais sofisticadas.
+Diversos estudos têm explorado algoritmos de detecção de objetos para localizar cogumelos em imagens e determinar o estágio de crescimento, visando otimizar a colheita.
 
-\lipsum[7] Métodos mais recentes incorporam técnicas de aprendizado de máquina e inteligência artificial \cite{zhang2025}, expandindo significativamente as possibilidades de análise e modelagem de sistemas complexos.
+Nguyen et al. \cite{Nguyen2024} projetaram e implementaram uma arquitetura de Sistema de Informação de Agricultura Inteligente (SAIS) em três camadas --- Dispositivo, Edge e Nuvem --- para o cultivo de cogumelos ostra (\textit{Pleurotus} spp.) em estufa, integrando um sensor ambiental IoT combinado (temperatura, umidade relativa e CO\textsubscript{2}) a uma câmera de vigilância RGB para coleta automatizada de dados. Técnicas de baixo custo foram empregadas, incluindo armazenamento de pequenos dados, reamostragem temporal para redução de volume e controle de qualidade baseado em IA leve (algoritmo KNN com janela móvel de 24 h) para detecção de anomalias ambientais e lacunas em imagens. Também um modelo de \textit{deep learning} (YOLOv5), ajustado por \textit{transfer learning}, foi treinado para detecção de cogumelos e posteriormente implementado para inferência em tempo real, demonstrando que a integração de IoT sensorial, visão computacional e IA reduzem o tráfego de dados à nuvem e os custos operacionais, mantendo informações suficientes para o manejo automatizado do cultivo.
+
+Outros estudos relevantes incluem a utilização do SSD (\textit{Single Shot MultiBox Detector}) em robôs colhedores de cogumelos, que alcançaram até 95\% de acurácia na detecção e 86,8\% de sucesso na colheita individual, evidenciando a viabilidade prática de sistemas automatizados em ambientes controlados \cite{Qian2020}. Pesquisas voltadas para a classificação de espécies de cogumelos comestíveis e venenosos mostraram que \textit{ensembles} de classificadores (Decision Tree, KNN, Random Forest, SVM, Naive Bayes) podem atingir 100\% de acurácia, reforçando a importância da inteligência artificial na diferenciação de cogumelos comestíveis e tóxicos \cite{Rahman2021}.
+
+A integração de Internet das Coisas (IoT) com ML em sistemas de fungicultura inteligente também tem recebido destaque. Sensores de temperatura e umidade, associados a microcontroladores, permitem ajustar automaticamente variáveis críticas para o crescimento do micélio e do corpo de frutificação. Algoritmos de ML garantem a identificação precisa de cogumelos comestíveis, prevenindo a produção e consumo de exemplares tóxicos. Resultados experimentais indicam que esses sistemas mantêm condições ideais de temperatura e umidade, reduzem o esforço manual e fornecem dados em tempo real para os produtores. Avaliações de usabilidade (SUS) também demonstraram alto nível de satisfação, com pontuação média de 82\%, evidenciando a aplicabilidade prática dessas soluções \cite{Rahman2021}.
+
+De forma complementar, Rahman et al. \cite{Rahman2021} demonstraram que a integração de sensores ambientais com sistemas IoT permite monitoramento contínuo em tempo real e emissão de alertas automáticos, garantindo respostas rápidas a alterações ambientais e promovendo uma gestão mais eficiente do processo produtivo.
+
+Além disso, é possível encontrar na literatura sistemas que monitoram o crescimento e detectam doenças na produção de outras variedades de cogumelos. Nuankaew et al. \cite{Nuankaew2025} desenvolveram um sistema de monitoramento do cogumelo ostra focado na detecção de infecções causadas por fungos do gênero \textit{Trichoderma}, altamente contagiosos. Utilizando um sensor ótico e sensores de umidade e temperatura, o sistema coletava os dados que, por sua vez, eram avaliados por um algoritmo DenseNet201. Os resultados obtidos indicam acurácia de 92,50\% na detecção da doença em cogumelos. O estudo demonstra ser possível a utilização de tal sistema, permitindo que fungicultores possam tratar potenciais surtos, aumentando a eficiência da produção e reduzindo custos por perdas.
+
+Desta forma, a integração entre algoritmos de aprendizagem profunda para análise visual, sensoriamento ambiental e tecnologias de Internet das Coisas (IoT) para monitoramento em tempo real configura uma abordagem tecnológica robusta e de elevada relevância para a produção de cogumelos. Soluções convencionais frequentemente apresentam restrições de acesso para usuários e produtores em campo, decorrentes de limitações de infraestrutura e da complexidade operacional. O sistema proposto neste projeto trata tais barreiras, viabilizando monitoramento remoto contínuo e fornecendo suporte automatizado à tomada de decisão. Essa abordagem estabelece uma base sólida para o desenvolvimento de sistemas inteligentes aplicáveis diretamente ao cultivo de espécies como o shimeji, promovendo incremento na produtividade, melhoria na segurança alimentar e maior sustentabilidade da fungicultura.
 
 % Metodologia
 \section{Metodologia}
 
-\lipsum[8] A metodologia desenvolvida neste trabalho segue as etapas ilustradas na Figura \ref{fig:exemplo} e descritas a seguir.
+Para a construção do sistema proposto, será implementada uma arquitetura de inteligência artificial baseada em aprendizado profundo (\textit{Deep Learning}), atuando como núcleo analítico do processo de monitoramento e detecção automatizada. O sistema integrará sensores óticos (câmeras com microcontrolador integrado) e sensores ambientais de temperatura, umidade relativa e luminosidade, interligados por uma infraestrutura IoT (\textit{Internet of Things}), responsável pela aquisição contínua e transmissão dos dados provenientes das estufas de cultivo.
 
-\subsection{Coleta de Dados}
+Durante o processo de coleta, múltiplos fluxos de imagem (bloco 1) e dados ambientais (bloco 2) serão capturados em tempo real, encaminhados para o sistema via wi-fi (blocos 3 e 4), indexados e armazenados em um banco de dados não relacional (blocos 5 e 6), garantindo integridade e disponibilidade para uso posterior em tarefas de treinamento e validação de modelos.
 
-\lipsum[9] Os dados foram coletados através de simulações computacionais utilizando parâmetros específicos. A Tabela \ref{tab:parametros} apresenta os principais parâmetros utilizados nas simulações.
+O conjunto de imagens coletadas comporá o dataset primário para o treinamento supervisionado da IA. O modelo de aprendizado profundo, baseado em redes neurais, será configurado para detecção de padrões anômalos durante o crescimento, possibilitando a classificação automatizada dos estágios durante o desenvolvimento dos cogumelos e a identificação precoce de anomalias nos compostos.
 
-\begin{table}[H]
+Essa abordagem possibilita a criação de um sistema autônomo e adaptativo, capaz de realizar inferência em tempo real, monitorar o desenvolvimento dos cogumelos com alta precisão e fornecer alertas preditivos ao produtor sobre possíveis contaminações ou irregularidades no ambiente de cultivo.
+
+\subsection{Desenvolvimento da Aprendizagem Profunda}
+
+O processo de treinamento foi realizado utilizando \textit{Deep Learning}, com uma rede neural convolucional (CNN, tipo de rede neural para reconhecimento de padrões) da arquitetura MobileNetV2 (projetada para tarefas de visão computacional, ideal para dispositivos com recursos limitados) combinada a um MLP (\textit{Multi-Layer Perceptron}, rede neural com várias camadas de neurônios) para a classificação final. Para otimizar o processo de aprendizado, foi aplicada a técnica de \textit{Transfer Learning} (onde um modelo treinado é reutilizado em uma tarefa relacionada), reaproveitando os pesos pré-treinados no dataset ImageNet e congelando as camadas convolucionais, treinando apenas a cabeça de classificação.
+
+A MobileNetV2 foi carregada com pesos pré-treinados no dataset ImageNet (um dos maiores e mais importantes bancos de imagens do mundo), e suas camadas convolucionais foram congeladas durante o treinamento inicial, atuando como extratoras de características visuais. Sobre ela, foi adicionada uma cabeça de classificação (onde as características extraídas nas camadas anteriores são traduzidas em previsão final) composta por:
+
+\begin{itemize}
+    \item \textbf{GlobalAveragePooling2D}\allowbreak: reduz a dimensionalidade dos mapas de características,\\resumindo-os em um único valor.
+    \item \textbf{Camada Dense} (64 neurônios, ReLU): combina as características extraídas (gerando uma representação abstrata pronta para ser usada na decisão final).
+    \item \textbf{Dropout} (0.5): previne overfitting (garantindo que a rede neural aprenda com os dados ao invés de memorizá-los).
+    \item \textbf{Camada Dense} (1 neurônio, Sigmoid): saída binária (probabilidade de ser saudável).
+\end{itemize}
+
+A função de ativação Sigmoid foi utilizada na camada de saída, pois o problema é binário. A decisão final é tomada com base em um \textit{threshold} (limiar) ajustável (padrão: 0.5):
+
+\begin{itemize}
+    \item Se $probabilidade\_saudavel \geq threshold$ $\rightarrow$ Saudável
+    \item Se $probabilidade\_saudavel < threshold$ $\rightarrow$ Anomalia
+\end{itemize}
+
+\subsection{Pré-processamento}
+
+As imagens foram redimensionadas para 224x224 pixels e normalizadas (valores de pixel entre 0 e 1). Durante o treino, foi aplicado \textit{data augmentation} (aumento artificial do tamanho e diversidade do dataset) com:
+
+\begin{itemize}
+    \item Rotação (até 45°)
+    \item Deslocamento horizontal e vertical (40\%)
+    \item Cisalhamento (inclinação) de 30\%
+    \item Zoom (40\%)
+    \item Espelhamento horizontal
+    \item Variação de brilho (0.5 a 1.5)
+    \item Desfoque gaussiano (redução da nitidez) aleatório em 30\% das imagens
+    \item Ruído gaussiano (simulação de imperfeições) em 20\% das imagens
+\end{itemize}
+
+Essas técnicas aumentaram artificialmente a diversidade do conjunto de treino, melhorando a capacidade de generalização do modelo.
+
+\subsection{Treinamento}
+
+O modelo foi compilado com o otimizador de aprendizagem Adam (taxa de aprendizado = 0.0001) e a função de perda \textit{binary crossentropy} (função para cálculo de perda). Foram utilizadas as seguintes técnicas de prevenção de overfitting:
+
+\begin{itemize}
+    \item \textbf{EarlyStopping} (monitorando \textit{val\_accuracy}, paciência = 15), interrompendo o treinamento após 15 épocas sem aprendizagem;
+    \item \textbf{ModelCheckpoint} (salvando o melhor modelo obtido);
+    \item \textbf{Class Weight} (compensando o desbalanceamento entre as classes devidas às diferentes quantidades de fotos para treino).
+\end{itemize}
+
+O treinamento foi realizado com 50 épocas (interrompido automaticamente pelo EarlyStopping). O dataset foi dividido em 80\% para treino e 20\% para validação, com as seguintes quantidades de imagem por classe:
+
+\begin{table}[ht]
 \centering
-\caption{Parâmetros utilizados nas simulações computacionais}
-\label{tab:parametros}
-\begin{tabular}{@{}lccl@{}}
-\toprule
-\textbf{Parâmetro} & \textbf{Símbolo} & \textbf{Valor} & \textbf{Unidade} \\ \midrule
-Tempo de simulação & $T_{sim}$ & 1000 & s \\
-Passo de integração & $\Delta t$ & 0.01 & s \\
-Número de iterações & $N_{iter}$ & 10000 & - \\
-Tolerância & $\epsilon$ & $10^{-6}$ & - \\
-Fator de amortecimento & $\zeta$ & 0.15 & - \\
-Frequência natural & $\omega_n$ & 25.0 & rad/s \\ \bottomrule
+\caption{Distribuição das imagens por classe}
+\label{tab:distribuicao-imagens}
+\begin{tabular}{lccc}
+\hline
+\textbf{Classe}   & \textbf{Treino} & \textbf{Validação} & \textbf{Total} \\ \hline
+Saudável          & 80              & 20                 & 100            \\
+Anomalia          & 160             & 40                 & 200            \\ \hline
+\textbf{Total}    & \textbf{240}    & \textbf{60}        & \textbf{300}   \\ \hline
 \end{tabular}
 \end{table}
 
-\subsection{Processamento e Análise}
+Como a classe ``Anomalia'' tinha o dobro de imagens da classe ``Saudável'', foi aplicado \texttt{class\_weight='balanced'}, atribuindo peso maior à classe minoritária (saudável) durante o cálculo da perda.
 
-\lipsum[10] O processamento dos dados seguiu um protocolo rigoroso de análise estatística. Os métodos numéricos clássicos foram implementados, incluindo o método de Euler, cuja equação fundamental é expressa como:
+\subsection{Fluxo de Processo}
+Durante o funcionamento, o sistema executa o processamento em tempo real de imagem, capturando aproximadamente 1 frame por minuto. Cada frame é enviado ao modelo de IA, que realiza a inferência instantânea e gera uma estimativa probabilística de contaminação com base em características morfológicas detectadas (bloco 7). Quando um evento anômalo é identificado --- como a presença de fungos invasores ou alterações visuais atípicas --- o sistema gera alertas automáticos (blocos 8), notificando o produtor por meio do aplicativo integrado. Da mesma forma, os dados de avaliação da imagem são salvos no banco de dados. O software foi projetado para operar em uma aplicação mobile, destinada ao monitoramento em tempo real do ambiente de cultivo, exibição de alertas, acompanhamento de métricas de umidade, temperatura e iluminação, e consulta de painéis analíticos dinâmicos com gráficos de desempenho.
 
-\begin{equation}
-\frac{dy}{dt} = f(t, y), \quad y(t_0) = y_0
-\label{eq:euler}
-\end{equation}
-
-onde $f(t, y)$ representa a função que descreve o sistema dinâmico. Para otimização dos parâmetros do modelo, utilizou-se a seguinte função de custo:
-
-\begin{equation}
-J(\theta) = \frac{1}{2m} \sum_{i=1}^{m} \left(h_\theta(x^{(i)}) - y^{(i)}\right)^2 + \frac{\lambda}{2m}\sum_{j=1}^{n}\theta_j^2
-\label{eq:cost_function}
-\end{equation}
-
-onde $\theta$ representa os parâmetros do modelo, $m$ é o número de amostras, $\lambda$ é o parâmetro de regularização, e $h_\theta(x)$ é a hipótese do modelo. A transformada de Fourier foi aplicada para análise no domínio da frequência:
-
-\begin{equation}
-F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t} dt
-\label{eq:fourier}
-\end{equation}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{imgs/img_001.jpg}
-\caption{Exemplo de visualização dos resultados obtidos através da metodologia proposta. A figura ilustra o comportamento do sistema ao longo do tempo.}
-\label{fig:exemplo}
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=\textwidth]{imgs/fluxograma.drawio.png}
+    \caption{Fluxograma da metodologia adotada para desenvolvimento do sistema para detecção de parasitas em cogumelos}
+    \label{fig:fluxograma}
+    
+    \vspace{2pt}
+    {\small Fonte: Autoria própria, 2026}
 \end{figure}
 
-\subsection{Validação do Modelo}
+A comunicação entre as instâncias é realizada via API RESTful, permitindo sincronização contínua de dados e emissão de relatórios com informações sobre a saúde dos compostos, eficiência ambiental e status de contaminação. Essa integração garante que o produtor disponha de feedbacks em tempo real sobre o estado de suas produções e insumos preditivos para otimização de recursos e prevenção de perdas.
 
-\lipsum[11] A validação foi realizada comparando os resultados simulados com dados experimentais. O erro médio quadrático (RMSE) foi calculado através de:
+Como resultado, o sistema fornece uma plataforma inteligente e autônoma de monitoramento preditivo de fungicultura, combinando visão computacional, IoT e aprendizado profundo em uma arquitetura escalável, voltada à melhoria da produtividade, qualidade e sustentabilidade dos cultivos de \textit{Pleurotus ostreatus} (shimeji).
 
-\begin{equation}
-RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}
-\label{eq:rmse}
-\end{equation}
+\subsection{Aplicação}
+O backend da aplicação foi desenvolvido em Node.js com Express, em JavaScript. A API usa MongoDB via Mongoose, JWT para autenticação e Socket.IO para comunicação em tempo real. Para armazenamento de imagens é utilizado o Cloudinary.
 
-onde $y_i$ são os valores observados e $\hat{y}_i$ são os valores preditos pelo modelo.
+O aplicativo mobile utiliza React Native com Expo e Expo Router, em TypeScript. Também utiliza Axios para chamadas à API, AsyncStorage para armazenamento local e módulos do Expo para notificações, áudio e outros recursos.
+
+O hardware utilizado consiste em um microcontrolador ESP32 com sensores de temperatura, umidade e luminosidade e uma câmera ESP32 para registro das imagens.
 
 % Resultados e Discussões
 \section{Resultados e Discussões}
 
-\lipsum[12-13] Os resultados obtidos demonstram a eficácia da metodologia proposta. A Tabela \ref{tab:resultados} apresenta uma comparação quantitativa entre diferentes abordagens.
+Para avaliar o desempenho do modelo proposto, foram definidas métricas para avaliação pós-treinamento: acurácia (proporção total de acertos), sensibilidade (\textit{recall} da anomalia, que mede a capacidade de detectar anomalias reais), especificidade (capacidade de identificar corretamente os casos saudáveis), taxa de falsos positivos (FPR, proporção de casos saudáveis classificados erroneamente como anomalia) e taxa de falsos negativos (FNR, proporção de anomalias classificadas erroneamente como saudáveis).
 
-\begin{table}[H]
+\begin{table}[ht]
 \centering
-\caption{Comparação de desempenho entre diferentes métodos}
-\label{tab:resultados}
-\begin{tabular}{@{}lccc@{}}
-\toprule
-\textbf{Método} & \textbf{RMSE} & \textbf{Tempo (s)} & \textbf{Precisão (\%)} \\ \midrule
-Método Proposto & 0.0023 & 15.2 & 98.5 \\
-Euler Clássico & 0.0145 & 8.7 & 92.3 \\
-Runge-Kutta 4ª ordem & 0.0038 & 21.5 & 97.1 \\
-Método Adaptativo & 0.0031 & 18.9 & 97.8 \\ \bottomrule
+\caption{Métricas de avaliação do modelo}
+\label{tab:metricas}
+\begin{tabular}{lc}
+\hline
+\textbf{Métrica}                       & \textbf{Valor} \\ \hline
+Acurácia                               & 68,33\%        \\
+Sensibilidade (Recall da Anomalia)     & 10\%           \\
+Especificidade                         & 97,5\%         \\
+FPR (Falsos Positivos)                 & 2,5\%          \\
+FNR (Falsos Negativos)                 & 90\%           \\ \hline
 \end{tabular}
 \end{table}
 
-\subsection{Análise Quantitativa}
+Além disso, foi obtida uma matriz de confusão para avaliação em valores absolutos obtidos na análise de amostras saudáveis e anômalas:
 
-\lipsum[14] Os dados quantitativos revelam que o método proposto apresenta melhor desempenho em termos de precisão. A relação entre os parâmetros pode ser expressa por:
+\begin{table}[ht]
+\centering
+\caption{Matriz de confusão do modelo}
+\label{tab:matriz-confusao}
+\begin{tabular}{lcc}
+\hline
+                       & \multicolumn{2}{c}{\textbf{Predito}} \\
+\cline{2-3}
+                       & \textbf{Anomalia} & \textbf{Saudável} \\ \hline
+\textbf{Anomalia (real)} & 2               & 18                \\
+\textbf{Saudável (real)} & 1               & 39                \\ \hline
+\end{tabular}
+\end{table}
 
-\begin{equation}
-\eta = \frac{P_{out}}{P_{in}} \times 100\% = \frac{V_{out} \cdot I_{out}}{V_{in} \cdot I_{in}} \times 100\%
-\label{eq:efficiency}
-\end{equation}
-
-onde $\eta$ representa a eficiência do sistema, $P_{out}$ é a potência de saída e $P_{in}$ é a potência de entrada.
-
-\subsection{Análise Qualitativa}
-
-\lipsum[15] Do ponto de vista qualitativo, observou-se que o comportamento do sistema é fortemente influenciado pelas condições iniciais e pelos parâmetros de controle. A matriz de transformação pode ser representada como:
-
-\begin{equation}
-\mathbf{A} = \begin{bmatrix}
-a_{11} & a_{12} & a_{13} \\
-a_{21} & a_{22} & a_{23} \\
-a_{31} & a_{32} & a_{33}
-\end{bmatrix}
-\label{eq:matrix}
-\end{equation}
+Observa-se que o modelo é extremamente conservador --- ele raramente classifica algo como anomalia (apenas 2 de 20 anomalias reais foram detectadas), mas quando o faz, quase sempre está certo (apenas 1 falso positivo em 20 saudáveis). Isso resultou em um FPR excelente (2,5\%), mas uma sensibilidade (10\%) e falsos negativos (90\%) baixos.
 
 \subsection{Discussão}
 
-\lipsum[16-17] A análise dos resultados indica que a abordagem proposta oferece vantagens significativas em relação aos métodos tradicionais. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula.
+O modelo, embora apresente resultados satisfatórios com acurácia de 68,33\% e FPR 2,5\%, ainda apresenta uma baixa sensibilidade para detecção de anomalias. Isso significa que muitas anomalias reais estão passando despercebidas, sendo classificadas como saudáveis.
 
-Proin adipiscing porta tellus, ut feugiat nibh adipiscing sit amet. In eu justo a felis faucibus ornare vel id metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
+As principais causas identificadas foram:
+
+\begin{itemize}
+    \item \textbf{Dataset pequeno e pouco diversificado}: 100 imagens por classe, com muitas imagens visualmente semelhantes;
+    \item \textbf{Desbalanceamento entre as classes}: a classe ``Anomalia'' tinha o dobro de imagens, o que foi compensado com \texttt{class\_weight}, mas ainda assim afetou o aprendizado;
+    \item \textbf{Dificuldade inerente à tarefa}: algumas anomalias (especialmente fungos em estágio inicial) são visualmente sutis;
+    \item \textbf{Baixa qualidade das imagens obtidas para o dataset}: as imagens fornecidas pela ESP32-CAM têm baixa resolução. Isso impacta diretamente no aprendizado e nos resultados do modelo proposto.
+\end{itemize}
 
 % Conclusão
 \section{Conclusão}
 
-\lipsum[18] Com base nos resultados obtidos, conclui-se que a metodologia desenvolvida apresenta excelente desempenho para análise de sistemas complexos. As principais contribuições deste trabalho incluem:
-
-\begin{itemize}
-    \item Desenvolvimento de um framework computacional robusto;
-    \item Validação experimental dos modelos propostos;
-    \item Comparação sistemática com métodos existentes;
-    \item Identificação de limitações e oportunidades de melhoria.
-\end{itemize}
-
-Trabalhos futuros incluem a extensão da metodologia para sistemas multidimensionais e a incorporação de técnicas de otimização avançadas.
+O presente trabalho desenvolveu um sistema inteligente de monitoramento para o cultivo de \textit{Pleurotus ostreatus} (shimeji), integrando sensores ambientais de temperatura, umidade e luminosidade a uma câmera ESP32-CAM em uma arquitetura IoT funcional. O sistema foi capaz de coletar dados ambientais e imagens de forma automatizada, transmiti-los via Wi-Fi e armazená-los em banco de dados não relacional, permitindo o monitoramento remoto em tempo real. A inteligência artificial, baseada em MobileNetV2 com \textit{Transfer Learning}, foi integrada a uma API FastAPI, possibilitando a classificação automática de imagens em saudável ou anomalia (fungos, estilamento e achatamento). Os resultados obtidos no conjunto de validação indicaram acurácia de 68,33\%, especificidade de 97,5\% e FPR de 2,5\%, com sensibilidade de 10\% e FNR de 90\%, evidenciando um comportamento conservador do modelo. Conclui-se que a integração entre IoT, visão computacional e aprendizagem profunda é viável e promissora para a fungicultura do Vale do Ribeira, mas que o desempenho do modelo precisa ser aprimorado com a coleta de mais dados, ajuste do \textit{threshold} de decisão e técnicas de \textit{fine-tuning}. Como melhorias futuras, propõe-se a implantação do sistema em campo, a ampliação do dataset com mais imagens e a validação do índice de infecção junto aos produtores.
 
 % Agradecimentos
 \section*{Agradecimentos}
 
-Os autores agradecem à Faculdade de Tecnologia do Estado de São Paulo (FATEC) e ao Centro Paula Souza (CPS) pelo apoio institucional. Este trabalho foi parcialmente financiado pela FAPESP (proc. 2024/12345-6) e CNPq (proc. 301234/2024-0).
+Os autores agradecem à Faculdade de Tecnologia do Estado de São Paulo (FATEC) e ao Centro Paula Souza (CPS) pelo apoio institucional.
 
 % Referências
 \bibliographystyle{IEEEtran}
