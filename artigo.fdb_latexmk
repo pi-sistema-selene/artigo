@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex artigo"] 1793647030.23755 "artigo.aux" "artigo.bbl" "artigo" 1793647033.09891 0
+["bibtex artigo"] 1793647030.23755 "artigo.aux" "artigo.bbl" "artigo" 1793648333.65297 0
   "./referencias.bib" 1792006347 4262 eb9769e5ca901388fd5ff82d10802d89 ""
   "C:/Users/Erlon/AppData/Local/Programs/MiKTeX/bibtex/bst/ieeetran/IEEEtran.bst" 1440622569 57748 7c8250ecf02814ce6ddc0cdbb63df1dd ""
-  "artigo.aux" 1793647032 4051 1bfe93688da1f79ddcb38bd45dcf2b6e "pdflatex"
+  "artigo.aux" 1793648332 4051 1bfe93688da1f79ddcb38bd45dcf2b6e "pdflatex"
   (generated)
   "artigo.bbl"
   "artigo.blg"
   (rewritten before read)
-["pdflatex"] 1793647030.52295 "c:/Users/Erlon/Desktop/Artigo-DSM5/template-paper-f299/artigo.tex" "artigo.pdf" "artigo" 1793647033.09939 0
+["pdflatex"] 1793648329.80028 "c:/Users/Erlon/Desktop/Artigo-DSM5/template-paper-f299/artigo.tex" "artigo.pdf" "artigo" 1793648333.65348 0
   "C:/Users/Erlon/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1778957654 123976 72b5a7d7975bba47276c9ad4e01a7673 ""
   "C:/Users/Erlon/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1761134785 13321623 48c67509cc9a157110e4cf1d86d46da7 ""
   "C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -209,11 +209,11 @@
   "C:/Users/Erlon/AppData/Local/Programs/MiKTeX/tex/latex/tools/array.sty" 1749468414 15698 f5f20b24886bb50156054c53e19b13fd ""
   "C:/Users/Erlon/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Erlon/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1729265222 55384 b454dec21c2d9f45ec0b793f0995b992 ""
-  "artigo.aux" 1793647032 4051 1bfe93688da1f79ddcb38bd45dcf2b6e "pdflatex"
+  "artigo.aux" 1793648332 4051 1bfe93688da1f79ddcb38bd45dcf2b6e "pdflatex"
   "artigo.bbl" 1793647030 4305 29519b7ea104cc4a37459967a3ccf1d9 "bibtex artigo"
-  "artigo.out" 1793647032 1544 a0d129e085a3ed556de96842c11df694 "pdflatex"
-  "artigo.tex" 1793647026 33546 e20942c2e167a33ed744a446487f4485 ""
-  "c:/Users/Erlon/Desktop/Artigo-DSM5/template-paper-f299/artigo.tex" 1793647026 33546 e20942c2e167a33ed744a446487f4485 ""
+  "artigo.out" 1793648332 1544 a0d129e085a3ed556de96842c11df694 "pdflatex"
+  "artigo.tex" 1793648328 33592 4bd8b57b2de73ce7dd1b98db353e7cb6 ""
+  "c:/Users/Erlon/Desktop/Artigo-DSM5/template-paper-f299/artigo.tex" 1793648328 33592 4bd8b57b2de73ce7dd1b98db353e7cb6 ""
   "imgs/Fig2.png" 1793646092 26380 db6f68daeebd40423a8da7d17df75d43 ""
   "imgs/Fig3.png" 1793646486 44792 a6485ca7989997d524598ee3524f3b61 ""
   "imgs/base/cps-logo.png" 1792004690 2862 0d44aa0a5e9d83c87deaed8e377653d3 ""
