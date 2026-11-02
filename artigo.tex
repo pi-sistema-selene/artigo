@@ -180,7 +180,7 @@ A MobileNetV2 foi carregada com pesos pré-treinados no dataset ImageNet (um dos
     \item \textbf{Camada Dense} (1 neurônio, Sigmoid): saída binária (probabilidade de ser saudável).
 \end{itemize}
 
-A função de ativação Sigmoid foi utilizada na camada de saída, pois o problema é binário. A decisão final é tomada com base em um \textit{threshold} (limiar) ajustável (padrão: 0.5):
+A função de ativação Sigmoid foi utilizada na camada de saída, pois o problema é binário. A decisão final é tomada com base em um \textit{threshold} (limiar) ajustável (valores de 0.4, 0.5 e 0.6):
 
 \begin{itemize}
     \item Se $probabilidade\_saudavel \geq threshold$ $\rightarrow$ Saudável
@@ -209,12 +209,12 @@ Essas técnicas aumentaram artificialmente a diversidade do conjunto de treino, 
 O modelo foi compilado com o otimizador de aprendizagem Adam (taxa de aprendizado = 0.0001) e a função de perda \textit{binary crossentropy} (função para cálculo de perda). Foram utilizadas as seguintes técnicas de prevenção de overfitting:
 
 \begin{itemize}
-    \item \textbf{EarlyStopping} (monitorando \textit{val\_accuracy}, paciência = 15), interrompendo o treinamento após 15 épocas sem aprendizagem;
-    \item \textbf{ModelCheckpoint} (salvando o melhor modelo obtido);
-    \item \textbf{Class Weight} (compensando o desbalanceamento entre as classes devidas às diferentes quantidades de fotos para treino).
+    \item \textbf{EarlyStopping} (monitorando \textit{val\_accuracy}, "paciência"), interrompendo o treinamento após 16, 25 e 50 épocas sem melhora na métrica monitorada;
+    \item \textbf{ModelCheckpoint} (salvando o melhor modelo obtido ao término do EarlyStopping);
+    \item \textbf{Class Weight} (utilizado em 9 testes para avaliar a compensação do desbalanceamento entre as classes devido à diferentes quantidades de fotos para treino).
 \end{itemize}
 
-O treinamento foi realizado com 50 épocas (interrompido automaticamente pelo EarlyStopping). O dataset foi dividido em 80\% para treino e 20\% para validação, com as seguintes quantidades de imagem por classe:
+O dataset foi dividido em 80\% para treino e 20\% para validação, com as seguintes quantidades de imagem por classe:
 
 \begin{table}[ht]
 \centering
@@ -229,10 +229,10 @@ Anomalia          & 160             & 40                 & 200            \\ \hl
 \end{tabular}
 \end{table}
 
-Como a classe ``Anomalia'' tinha o dobro de imagens da classe ``Saudável'', foi aplicado \texttt{class\_weight='balanced'}, atribuindo peso maior à classe minoritária (saudável) durante o cálculo da perda.
+Como a classe ``Anomalia'' tinha o dobro de imagens da classe ``Saudável'', foi testado o \texttt{class\_weight='balanced'}, atribuindo peso maior à classe minoritária (saudável) durante o cálculo da perda.
 
 \subsection{Fluxo de Processo}
-Durante o funcionamento, o sistema executa o processamento em tempo real de imagem, capturando aproximadamente 1 frame por minuto. Cada frame é enviado ao modelo de IA, que realiza a inferência instantânea e gera uma estimativa probabilística de contaminação com base em características morfológicas detectadas (bloco 7). Quando um evento anômalo é identificado --- como a presença de fungos invasores ou alterações visuais atípicas --- o sistema gera alertas automáticos (blocos 8), notificando o produtor por meio do aplicativo integrado. Da mesma forma, os dados de avaliação da imagem são salvos no banco de dados. O software foi projetado para operar em uma aplicação mobile, destinada ao monitoramento em tempo real do ambiente de cultivo, exibição de alertas, acompanhamento de métricas de umidade, temperatura e iluminação, e consulta de painéis analíticos dinâmicos com gráficos de desempenho.
+Durante o funcionamento, o modelo treinado foi inserido em uma API desenvolvida em Python. Por sua vez, a API foi armazenada na plataforma de hospedagem Render utilizando o plano gratuito. O sistema executa o processamento em tempo real de imagem, capturando aproximadamente 1 frame por minuto. Cada frame é enviado ao modelo de IA, que realiza a inferência instantânea e gera uma estimativa probabilística de contaminação com base em características morfológicas detectadas (bloco 7). Quando um evento anômalo é identificado --- como a presença de fungos invasores ou alterações visuais atípicas --- o sistema gera alertas automáticos (blocos 8), notificando o produtor por meio do aplicativo integrado. Da mesma forma, os dados de avaliação da imagem são salvos no banco de dados. O software foi projetado para operar em uma aplicação mobile, destinada ao monitoramento em tempo real do ambiente de cultivo, exibição de alertas, acompanhamento de métricas de umidade, temperatura e iluminação, e consulta de painéis analíticos dinâmicos com gráficos de desempenho.
 
 \begin{figure}[htb]
     \centering
@@ -258,44 +258,69 @@ O hardware utilizado consiste em um microcontrolador ESP32 com sensores de tempe
 % Resultados e Discussões
 \section{Resultados e Discussões}
 
-Para avaliar o desempenho do modelo proposto, foram definidas métricas para avaliação pós-treinamento: acurácia (proporção total de acertos), sensibilidade (\textit{recall} da anomalia, que mede a capacidade de detectar anomalias reais), especificidade (capacidade de identificar corretamente os casos saudáveis), taxa de falsos positivos (FPR, proporção de casos saudáveis classificados erroneamente como anomalia) e taxa de falsos negativos (FNR, proporção de anomalias classificadas erroneamente como saudáveis).
+De acordo com as variáveis pre-estabelecidas (class weight, Early Stopping e  Threshold), foi definida uma matriz para os testes de treino dos modelos, conforme Tabela 2.
 
-\begin{table}[ht]
+\begin{table}[htb]
 \centering
-\caption{Métricas de avaliação do modelo}
-\label{tab:metricas}
-\begin{tabular}{lc}
+\caption{Configurações de treinamento avaliadas}
+\label{tab:configuracoes-treino}
+\begin{tabular}{cccc}
 \hline
-\textbf{Métrica}                       & \textbf{Valor} \\ \hline
-Acurácia                               & 68,33\%        \\
-Sensibilidade (Recall da Anomalia)     & 10\%           \\
-Especificidade                         & 97,5\%         \\
-FPR (Falsos Positivos)                 & 2,5\%          \\
-FNR (Falsos Negativos)                 & 90\%           \\ \hline
+\textbf{Treino} & \textbf{Class Weight} & \textbf{Early Stopping} & \textbf{Threshold} \\ \hline
+1  & Sim & 16 & 0.4 \\
+2  & Sim & 16 & 0.5 \\
+3  & Sim & 16 & 0.6 \\
+4  & Sim & 25 & 0.4 \\
+5  & Sim & 25 & 0.5 \\
+6  & Sim & 25 & 0.6 \\
+7  & Sim & 50 & 0.4 \\
+8  & Sim & 50 & 0.5 \\
+9  & Sim & 50 & 0.6 \\ \hline
+10 & Não & 16 & 0.4 \\
+11 & Não & 16 & 0.5 \\
+12 & Não & 16 & 0.6 \\
+13 & Não & 25 & 0.4 \\
+14 & Não & 25 & 0.5 \\
+15 & Não & 25 & 0.6 \\
+16 & Não & 50 & 0.4 \\
+17 & Não & 50 & 0.5 \\
+18 & Não & 50 & 0.6 \\ \hline
 \end{tabular}
 \end{table}
 
-Além disso, foi obtida uma matriz de confusão para avaliação em valores absolutos obtidos na análise de amostras saudáveis e anômalas:
+Desta forma, foram obtidos 18 modelos diferentes. Para avaliar o desempenho dos modelo obtidos, foram definidas métricas para avaliação pós-treinamento: acurácia (proporção total de acertos), sensibilidade (recall da anomalia, que mede a capacidade de detectar anomalias reais), especificidade (capacidade de identificar corretamente os casos saudáveis), taxa de falsos positivos (FPR, proporção de casos saudáveis classificados erroneamente como anomalia) e taxa de falsos negativos (FNR, proporção de anomalias classificadas erroneamente como saudáveis).
 
-\begin{table}[ht]
-\centering
-\caption{Matriz de confusão do modelo}
-\label{tab:matriz-confusao}
-\begin{tabular}{lcc}
-\hline
-                       & \multicolumn{2}{c}{\textbf{Predito}} \\
-\cline{2-3}
-                       & \textbf{Anomalia} & \textbf{Saudável} \\ \hline
-\textbf{Anomalia (real)} & 2               & 18                \\
-\textbf{Saudável (real)} & 1               & 39                \\ \hline
-\end{tabular}
-\end{table}
+Para avaliar o desempenho dos modelos foram definidas métricas para avaliação pós-
+treinamento: acurácia (proporção total de acertos), sensibilidade (recall da anomalia, que mede a capacidade de detectar anomalias reais), especificidade (capacidade de identificar corretament os casos saudáveis), taxa de falsos positivos (FPR, proporção de casos saudáveis classificados erroneamente como anomalia) e taxa de falsos negativos (FNR, proporção de anomalias classificadas erroneamente como saudáveis).
+	
+Nos primeiros 9 testes foram realizados treinos com balanceamento de classes (class weight, para avaliar se impacta no resultado do modelo), Early Stopping de 16, 25 e 50 (encerrando o treino de acordo com a quantidade de épocas sem evolução do modelo) e Threshould de 0.4, 0.5 e 0.6 (que é o limiar para definir se o resultado obtido com o modelo representa cogumelo com “anomalia” ou “saudável”. Os dados estão representados na figura 2.
 
-Observa-se que o modelo é extremamente conservador --- ele raramente classifica algo como anomalia (apenas 2 de 20 anomalias reais foram detectadas), mas quando o faz, quase sempre está certo (apenas 1 falso positivo em 20 saudáveis). Isso resultou em um FPR excelente (2,5\%), mas uma sensibilidade (10\%) e falsos negativos (90\%) baixos.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgs/Fig2.png}
+    \caption{Resultados obtidos com Balanceamento de classes}    
+    \vspace{2pt}
+    {\small Fonte: Autoria própria, 2026}
+\end{figure}
+
+Observa-se que os modelos treinados com \textit{class weight} apresentam resultados oscilantes, com acurácia entre 45 e 68,3\%, sensibilidade entre 35 e 100\%, especificidade entre 0 e 65\%, Falsos positivos entre 35 e 100\% e Falsos negativos entre 0 e 65\%. O treino 2 (realizado com Early Stopping de 16 e threshold de 0.5), embora tenha 45\% de acurácia, 35\% de sensibilidade e 65\% de especificidade, apresenta as métricas mais equilibradas de falsos positivos (35\%) e falsos negativos (65\%).
+
+Os testes seguintes utilizaram as mesmas variáveis dos anteriores, porém sem o class weight. Os resultados obtidos estão na Figura 3.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{imgs/Fig3.png}
+    \caption{Resultados obtidos sem balanceamento de classes}    
+    \vspace{2pt}
+    {\small Fonte: Autoria própria, 2026}
+\end{figure}
+
+Observa-se que os modelos treinados sem \textit{class weight} apresentam um padrão nos resultados, com falsos positivos acima de 95\% em todos os treinos. Desta forma, pode-se inferir que, mesmo as classes estando devidamente separadas para o treino do modelo (anomalia e saudável), as diferenças nas quantidades de imagens de cada classe impactam diretamente no desempenho do modelo, sendo que o balanceamento das classes fator determinante no desempenho do mesmo.
+
 
 \subsection{Discussão}
 
-O modelo, embora apresente resultados satisfatórios com acurácia de 68,33\% e FPR 2,5\%, ainda apresenta uma baixa sensibilidade para detecção de anomalias. Isso significa que muitas anomalias reais estão passando despercebidas, sendo classificadas como saudáveis.
+O modelo, embora alcance resultados promissores, ainda apresenta uma baixa sensibilidade para diferenciação de cogumelos anômalos e saudáveis. Os resultados dos testes mostram que, mesmo nas melhores condições (conforme observado no treino 2 com class weight, Early Stopping de 16 e threshold de 0.5), ainda não obtiveram-se resultados satisfatórios de falsos positivos e falsos negativos simultaneamente baixos.
 
 As principais causas identificadas foram:
 
@@ -309,7 +334,7 @@ As principais causas identificadas foram:
 % Conclusão
 \section{Conclusão}
 
-O presente trabalho desenvolveu um sistema inteligente de monitoramento para o cultivo de \textit{Pleurotus ostreatus} (shimeji), integrando sensores ambientais de temperatura, umidade e luminosidade a uma câmera ESP32-CAM em uma arquitetura IoT funcional. O sistema foi capaz de coletar dados ambientais e imagens de forma automatizada, transmiti-los via Wi-Fi e armazená-los em banco de dados não relacional, permitindo o monitoramento remoto em tempo real. A inteligência artificial, baseada em MobileNetV2 com \textit{Transfer Learning}, foi integrada a uma API FastAPI, possibilitando a classificação automática de imagens em saudável ou anomalia (fungos, estilamento e achatamento). Os resultados obtidos no conjunto de validação indicaram acurácia de 68,33\%, especificidade de 97,5\% e FPR de 2,5\%, com sensibilidade de 10\% e FNR de 90\%, evidenciando um comportamento conservador do modelo. Conclui-se que a integração entre IoT, visão computacional e aprendizagem profunda é viável e promissora para a fungicultura do Vale do Ribeira, mas que o desempenho do modelo precisa ser aprimorado com a coleta de mais dados, ajuste do \textit{threshold} de decisão e técnicas de \textit{fine-tuning}. Como melhorias futuras, propõe-se a implantação do sistema em campo, a ampliação do dataset com mais imagens e a validação do índice de infecção junto aos produtores.
+O presente trabalho desenvolveu um sistema inteligente de monitoramento para o cultivo de Pleurotus ostreatus (shimeji), integrando sensores ambientais de temperatura, umidade e luminosidade a uma câmera ESP32-CAM em uma arquitetura IoT funcional. O sistema foi capaz de coletar dados ambientais e imagens de forma automatizada, transmiti-los via Wi-Fi e armazená-los em banco de dados não relacional, permitindo o monitoramento remoto em tempo real. A inteligência artificial, baseada em MobileNetV2 com Transfer Learning, foi integrada a uma API FastAPI, possibilitando a classificação automática de imagens em saudável ou anomalia (fungos, estilamento e achatamento). Os resultados obtidos no conjunto de validação indicaram modelos com variação nos resultados de classificação devido, principalmente, ao dataset reduzido. Conclui-se que a integração entre IoT, visão computacional e aprendizagem profunda é viável e promissora para a fungicultura do Vale do Ribeira, mas que o desempenho do modelo precisa ser aprimorado com a coleta de mais dados, ajuste do threshold de decisão e quantidade de épocas de treino. Como melhorias futuras, propõe-se a implantação do sistema em campo, a ampliação do dataset com mais imagens e a validação do índice de infecção junto aos produtores.
 
 % Agradecimentos
 \section*{Agradecimentos}
