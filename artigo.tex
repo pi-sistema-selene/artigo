@@ -289,15 +289,12 @@ De acordo com as variáveis pre-estabelecidas (class weight, Early Stopping e  T
 \end{table}
 
 Desta forma, foram obtidos 18 modelos diferentes. Para avaliar o desempenho dos modelo obtidos, foram definidas métricas para avaliação pós-treinamento: acurácia (proporção total de acertos), sensibilidade (recall da anomalia, que mede a capacidade de detectar anomalias reais), especificidade (capacidade de identificar corretamente os casos saudáveis), taxa de falsos positivos (FPR, proporção de casos saudáveis classificados erroneamente como anomalia) e taxa de falsos negativos (FNR, proporção de anomalias classificadas erroneamente como saudáveis).
-
-Para avaliar o desempenho dos modelos foram definidas métricas para avaliação pós-
-treinamento: acurácia (proporção total de acertos), sensibilidade (recall da anomalia, que mede a capacidade de detectar anomalias reais), especificidade (capacidade de identificar corretament os casos saudáveis), taxa de falsos positivos (FPR, proporção de casos saudáveis classificados erroneamente como anomalia) e taxa de falsos negativos (FNR, proporção de anomalias classificadas erroneamente como saudáveis).
 	
 Nos primeiros 9 testes foram realizados treinos com balanceamento de classes (class weight, para avaliar se impacta no resultado do modelo), Early Stopping de 16, 25 e 50 (encerrando o treino de acordo com a quantidade de épocas sem evolução do modelo) e Threshould de 0.4, 0.5 e 0.6 (que é o limiar para definir se o resultado obtido com o modelo representa cogumelo com “anomalia” ou “saudável”. Os dados estão representados na figura 2.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{imgs/Fig2.png}
+    \includegraphics[width=0.8\textwidth]{imgs/Fig2.png}
     \caption{Resultados obtidos com Balanceamento de classes}    
     \vspace{2pt}
     {\small Fonte: Autoria própria, 2026}
@@ -309,7 +306,7 @@ Os testes seguintes utilizaram as mesmas variáveis dos anteriores, porém sem o
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{imgs/Fig3.png}
+    \includegraphics[width=0.8\textwidth]{imgs/Fig3.png}
     \caption{Resultados obtidos sem balanceamento de classes}    
     \vspace{2pt}
     {\small Fonte: Autoria própria, 2026}
