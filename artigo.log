@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.22)  3 NOV 2026 09:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.10.22)  3 NOV 2026 09:40
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -842,11 +842,11 @@ File: imgs/base/governo-sp-secretaria-logo.png Graphic file (type png)
 Package pdftex.def Info: imgs/base/governo-sp-secretaria-logo.png  used on input line 293.
 (pdftex.def)             Requested size: 168.61908pt x 29.87547pt.
 [7 <./imgs/fluxograma.drawio.png>]
-<imgs/Fig2.png, id=130, 486.31688pt x 265.74281pt>
+<imgs/Fig2.png, id=130, 479.391pt x 262.0992pt>
 File: imgs/Fig2.png Graphic file (type png)
 <use imgs/Fig2.png>
 Package pdftex.def Info: imgs/Fig2.png  used on input line 297.
-(pdftex.def)             Requested size: 364.19667pt x 199.0106pt.
+(pdftex.def)             Requested size: 386.96027pt x 211.56729pt.
 
 
 File: imgs/base/fatec-rgt.png Graphic file (type png)
@@ -862,38 +862,38 @@ File: imgs/base/governo-sp-secretaria-logo.png Graphic file (type png)
 Package pdftex.def Info: imgs/base/governo-sp-secretaria-logo.png  used on input line 304.
 (pdftex.def)             Requested size: 168.61908pt x 29.87547pt.
 [8 <./imgs/Fig2.png>]
-<imgs/Fig3.png, id=138, 478.734pt x 261.048pt>
+<imgs/Fig3.png, id=138, 479.391pt x 262.0992pt>
 File: imgs/Fig3.png Graphic file (type png)
 <use imgs/Fig3.png>
 Package pdftex.def Info: imgs/Fig3.png  used on input line 309.
-(pdftex.def)             Requested size: 364.19667pt x 198.5977pt.
+(pdftex.def)             Requested size: 386.96027pt x 211.56729pt.
 
 
 File: imgs/base/fatec-rgt.png Graphic file (type png)
 <use imgs/base/fatec-rgt.png>
-Package pdftex.def Info: imgs/base/fatec-rgt.png  used on input line 335.
+Package pdftex.def Info: imgs/base/fatec-rgt.png  used on input line 329.
 (pdftex.def)             Requested size: 50.38678pt x 22.76228pt.
 File: imgs/base/cps-logo.png Graphic file (type png)
 <use imgs/base/cps-logo.png>
-Package pdftex.def Info: imgs/base/cps-logo.png  used on input line 335.
+Package pdftex.def Info: imgs/base/cps-logo.png  used on input line 329.
 (pdftex.def)             Requested size: 38.12112pt x 25.6073pt.
 File: imgs/base/governo-sp-secretaria-logo.png Graphic file (type png)
 <use imgs/base/governo-sp-secretaria-logo.png>
-Package pdftex.def Info: imgs/base/governo-sp-secretaria-logo.png  used on input line 335.
+Package pdftex.def Info: imgs/base/governo-sp-secretaria-logo.png  used on input line 329.
 (pdftex.def)             Requested size: 168.61908pt x 29.87547pt.
 [9 <./imgs/Fig3.png>] (artigo.bbl
 
 File: imgs/base/fatec-rgt.png Graphic file (type png)
 <use imgs/base/fatec-rgt.png>
-Package pdftex.def Info: imgs/base/fatec-rgt.png  used on input line 89.
+Package pdftex.def Info: imgs/base/fatec-rgt.png  used on input line 81.
 (pdftex.def)             Requested size: 50.38678pt x 22.76228pt.
 File: imgs/base/cps-logo.png Graphic file (type png)
 <use imgs/base/cps-logo.png>
-Package pdftex.def Info: imgs/base/cps-logo.png  used on input line 89.
+Package pdftex.def Info: imgs/base/cps-logo.png  used on input line 81.
 (pdftex.def)             Requested size: 38.12112pt x 25.6073pt.
 File: imgs/base/governo-sp-secretaria-logo.png Graphic file (type png)
 <use imgs/base/governo-sp-secretaria-logo.png>
-Package pdftex.def Info: imgs/base/governo-sp-secretaria-logo.png  used on input line 89.
+Package pdftex.def Info: imgs/base/governo-sp-secretaria-logo.png  used on input line 81.
 (pdftex.def)             Requested size: 168.61908pt x 29.87547pt.
 [10])
 
@@ -926,7 +926,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  84i,19n,87p,1402b,983s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/Erlon/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on artigo.pdf (11 pages, 543679 bytes).
+Output written on artigo.pdf (11 pages, 479102 bytes).
 PDF statistics:
  237 PDF objects out of 1000 (max. 8388607)
  38 named destinations out of 1000 (max. 500000)
